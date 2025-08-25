@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s | DevRel Labs'
   },
   icons: {
-    icon: "/favicon.ico"
+    icon: "/devrel-labs/favicon.ico"
   },
   description: 'DevRel Labs is a collaborative GitHub organization by the nihitdotdev team, dedicated to creating innovative developer tools, fostering open source communities, and advancing modern software development for next-generation developers.',
   keywords: [
