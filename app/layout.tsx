@@ -98,7 +98,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico?v=2" />
-      <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
       <body className={jetbrainsMono.className}>{children}</body>
     </html>
   );
