@@ -44,39 +44,39 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fetchGitHubData = async () => {
-      try {
-        setLoading(true);
+  // useEffect(() => {
+  //   const fetchGitHubData = async () => {
+  //     try {
+  //       setLoading(true);
         
-        // Fetch organization data
-        const orgResponse = await fetch('https://api.github.com/orgs/devrel-labs');
-        const orgData = await orgResponse.json();
-        setOrgStats(orgData);
+  //       // Fetch organization data
+  //       const orgResponse = await fetch('https://api.github.com/orgs/devrel-labs');
+  //       const orgData = await orgResponse.json();
+  //       setOrgStats(orgData);
 
-        // Fetch repositories
-        const reposResponse = await fetch('https://api.github.com/orgs/devrel-labs/repos?sort=updated&per_page=6');
-        const reposData = await reposResponse.json();
-        setRepositories(reposData);
+  //       // Fetch repositories
+  //       const reposResponse = await fetch('https://api.github.com/orgs/devrel-labs/repos?sort=updated&per_page=6');
+  //       const reposData = await reposResponse.json();
+  //       setRepositories(reposData);
 
-        // Calculate total stars
-        const stars = reposData.reduce((total: number, repo: Repository) => total + repo.stargazers_count, 0);
-        setTotalStars(stars);
+  //       // Calculate total stars
+  //       const stars = reposData.reduce((total: number, repo: Repository) => total + repo.stargazers_count, 0);
+  //       setTotalStars(stars);
 
-        // Fetch members
-        const membersResponse = await fetch('https://api.github.com/orgs/devrel-labs/members?per_page=8');
-        const membersData = await membersResponse.json() ?? [];
-        setMembers(membersData);
+  //       // Fetch members
+  //       const membersResponse = await fetch('https://api.github.com/orgs/devrel-labs/members?per_page=8');
+  //       const membersData = await membersResponse.json() ?? [];
+  //       setMembers(membersData);
 
-      } catch (error) {
-        console.error('Error fetching GitHub data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //     } catch (error) {
+  //       console.error('Error fetching GitHub data:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchGitHubData();
-  }, []);
+  //   fetchGitHubData();
+  // }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
