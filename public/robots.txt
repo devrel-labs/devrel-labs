@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devrel-labs.github.io/sitemap.xml
