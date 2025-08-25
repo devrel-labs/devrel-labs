@@ -460,19 +460,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-cyan-400 mb-2 font-mono">
-                {loading ? '...' : "100"}+
+                {loading ? '...' : "members.length"}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// Community Members</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-purple-400 mb-2 font-mono">
-                {loading ? '...' : "orgStats?.public_repos" }+
+                {loading ? '...' : "orgStats?.public_repos"}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// Open Source Repositories</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-pink-400 mb-2 font-mono">
-                {loading ? '...' : 100+}+
+                {loading ? '...' : "totalStars"}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// GitHub Stars</div>
             </div>
