@@ -38,45 +38,51 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [totalStars, setTotalStars] = useState(0);
 
+  console.log(members);
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // useEffect(() => {
-  //   const fetchGitHubData = async () => {
-  //     try {
-  //       setLoading(true);
+  useEffect(() => {
+    const fetchGitHubData = async () => {
+      try {
+        setLoading(true);
         
-  //       // Fetch organization data
-  //       const orgResponse = await fetch('https://api.github.com/orgs/devrel-labs');
-  //       const orgData = await orgResponse.json();
-  //       setOrgStats(orgData);
+        // Fetch organization data
+        const orgResponse = await fetch('https://api.github.com/orgs/devrel-labs');
+        const orgData = await orgResponse.json();
+        setOrgStats(orgData);
 
-  //       // Fetch repositories
-  //       const reposResponse = await fetch('https://api.github.com/orgs/devrel-labs/repos?sort=updated&per_page=6');
-  //       const reposData = await reposResponse.json();
-  //       setRepositories(reposData);
+        // Fetch repositories
+        const reposResponse = await fetch('https://api.github.com/orgs/devrel-labs/repos?sort=updated&per_page=6');
+        const reposData = await reposResponse.json();
+        setRepositories(reposData);
 
-  //       // Calculate total stars
-  //       const stars = reposData.reduce((total: number, repo: Repository) => total + repo.stargazers_count, 0);
-  //       setTotalStars(stars);
+        // Calculate total stars
+        const stars = reposData.reduce((total: number, repo: Repository) => total + repo.stargazers_count, 0);
+        setTotalStars(stars);
 
-  //       // Fetch members
-  //       const membersResponse = await fetch('https://api.github.com/orgs/devrel-labs/members?per_page=8');
-  //       const membersData = await membersResponse.json() ?? [];
-  //       setMembers(membersData);
+        // Fetch members
+        const membersResponse = await fetch('https://api.github.com/orgs/devrel-labs/members');
+        const membersData = await membersResponse.json();
+        if (Array.isArray(membersData)) {
+          setMembers(membersData);
+        } else {
+          setMembers([]);
+        }
 
-  //     } catch (error) {
-  //       console.error('Error fetching GitHub data:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+      } catch (error) {
+        console.error('Error fetching GitHub data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchGitHubData();
-  // }, []);
+    fetchGitHubData();
+  }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -405,7 +411,7 @@ export default function Home() {
             </p>
           </div>
 
-          {loading ? (
+          {false ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[...Array(8)].map((_, index) => (
                 <div key={index} className="text-center group animate-pulse">
@@ -460,19 +466,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-cyan-400 mb-2 font-mono">
-                {loading ? '...' : "members.length"}+
+                {loading ? '...' : members.length + 10}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// Community Members</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-purple-400 mb-2 font-mono">
-                {loading ? '...' : "orgStats?.public_repos"}+
+                {loading ? '...' : orgStats?.public_repos ?? 1 + 5}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// Open Source Repositories</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-lg border border-gray-700/50">
               <div className="text-3xl font-bold text-pink-400 mb-2 font-mono">
-                {loading ? '...' : "totalStars"}+
+                {loading ? '...' : totalStars + 10}+
               </div>
               <div className="text-gray-400 font-mono text-sm">// GitHub Stars</div>
             </div>
@@ -558,4 +564,8 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+function fetchGitHubData() {
+  throw new Error('Function not implemented.');
 }
